@@ -1,0 +1,35 @@
+.Navbar{
+    background-color: #fefefe;
+    width: 100%;
+    /* position: fixed; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index:1;
+    box-shadow: 5px 5px 4px  grey;
+}
+
+.Navbar nav{
+    display: flex;
+}
+
+.Navbar img{
+    height: 70px;
+    width: 90px;
+    padding-left: 5px;
+}
+
+
+@media (max-width: 800px){
+    .Navbar span{
+        display: none;
+    }
+}
+
+@media (max-width: 399px){
+    .Navbar div img {
+        display: none;
+    }
+}
+
+

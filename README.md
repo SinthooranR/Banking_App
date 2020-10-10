@@ -1,3 +1,7 @@
+## Creators:
+Sinthooran Ravinathan   (SinthooranR)
+Ibrahim Abubaker        (ibrahimabubaker)     
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
