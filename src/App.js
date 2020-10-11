@@ -6,8 +6,7 @@ import Navbar from './components/Shared/Navigation/Navbar';
 
 // Page Components
 import WelcomePage from './pages/Welcome/Welcome';
-import LoginPage from './pages/Users/Login';
-import SignUpPage from './pages/Users/Signup';
+import Authentication from './pages/Users/Authentication';
 import CardsPage from './pages/CreditCards/CardManage';
 
 import {
@@ -23,8 +22,7 @@ function App() {
      <Navbar />
      <Switch>
       <Route exact path="/" component={WelcomePage}/>
-      <Route path="/login" component={LoginPage}/>
-      <Route path="/signup" component={SignUpPage}/>
+      <Route path="/authentication" component={Authentication}/>
       <Route path="/cards" component={CardsPage}/>
      </Switch>
    </Router>

@@ -11,8 +11,7 @@ const navbar = (props) => (
     <nav>
       <ul className="Navbar">
         <NavItem routeLink="/" routeName="Home" />
-        <NavItem routeLink="/login" routeName="Login" />
-        <NavItem routeLink="/signup" routeName="SignUp" />
+        <NavItem routeLink="/authentication" routeName="Login|SignUp" />
         <NavItem routeLink="/cards" routeName="CardStuff" />
       </ul>
     </nav>

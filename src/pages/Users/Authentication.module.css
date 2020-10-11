@@ -1,0 +1,19 @@
+.AuthForm{
+    max-width: 400px;
+	margin: 10px auto;
+	padding: 16px;
+	background: #F7F7F7;
+}
+
+.AuthForm button {
+	height: 2rem;
+}
+
+.AuthForm button:disabled,
+.AuthForm button:hover:disabled,
+.AuthForm button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
