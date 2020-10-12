@@ -17,3 +17,7 @@
   border-color: #ccc;
   cursor: not-allowed;
 }
+
+.characterErrorMsg { 
+  color: red;
+}

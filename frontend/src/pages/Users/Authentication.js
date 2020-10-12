@@ -71,6 +71,9 @@ const Login = (props) => {
                 value={name}
                 onChange={handleNameChange}
               />
+              {
+                !name && <p className={classes.characterErrorMsg}>Please enter your name</p>
+              }
             </div>
           )}
           <label>Username: </label>
@@ -80,6 +83,9 @@ const Login = (props) => {
             value={username}
             onChange={handleUsernameChange}
           />
+            {
+            (!username || (username.length < 6 || username.length > 10)) && <p className={classes.characterErrorMsg}>Username must be between 6 and 10 characters</p>
+            }
         </div>
         <div>
           <label>Password: </label>
@@ -89,9 +95,12 @@ const Login = (props) => {
             value={password}
             onChange={handlePasswordChange}
           />
+          {
+            (!password || (password.length < 6 || password.length > 10)) && <p className={classes.characterErrorMsg}>Password must be between 6 and 10 characters</p>
+          }
         </div>
         <div>
-          <button type="submit">{signupMode ? "SIGNUP" : "LOGIN"}</button>
+          <Button type="submit">{signupMode ? "SIGNUP" : "LOGIN"}</Button>
         </div>
         <div>
           <Button onClick={modeSwitchHandler}>
