@@ -4,7 +4,7 @@ import logo from "../../../logo.svg";
 import NavItem from "./NavItem";
 
 import { Authenticate } from "../../../authContext";
-import Button from "../UI/Button";
+import Button from '@material-ui/core/Button';
 
 import classes from "./Navbar.module.css";
 
@@ -35,7 +35,7 @@ const Navbar = () => {
           {auth.loggedIn && (
             <React.Fragment>
               <NavItem routeLink="/cards" routeName="CardStuff" />
-              <Button danger onClick={logoutHandler}>
+              <Button color="secondary" onClick={logoutHandler} variant="contained">
                 LOGOUT
               </Button>
             </React.Fragment>

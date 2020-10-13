@@ -2,40 +2,51 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import classes from "./Authentication.module.css";
-import Button from "../../components/Shared/UI/Button";
-import { Authenticate } from "../../authContext";
+// import Button from "../../components/Shared/UI/Button";
 
+import Button from '@material-ui/core/Button';
+import { Authenticate } from "../../authContext";
 
 const Login = (props) => {
   const [name, setName] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [signupMode, setSignupMode] = useState(false);
+  const [errUsername, setErrUsername] = useState(false);
+  const [errPassword, setErrPassword] = useState(false);
+  const [errName, setErrName] = useState(false);
 
   const auth = useContext(Authenticate);
   const history = useHistory();
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     name: "",
-  //     username: "",
-  //     password: "",
-  //     signupMode: false,
-  //     disableButton: false
-  //   };
-  // }
-
   const handleNameChange = (event) => {
     setName(event.target.value);
+    if(!event.target.value){
+      setErrName(true);
+    }
+    else{
+      setErrName(false);
+    }
   };
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+    if(event.target.value.length < 6 || event.target.value.length > 10){
+      setErrUsername(true);
+    }
+    else{
+      setErrUsername(false);
+    }
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+    if(event.target.value.length < 6 || event.target.value.length > 10){
+      setErrPassword(true);
+    }
+    else{
+      setErrPassword(false);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -43,21 +54,27 @@ const Login = (props) => {
       alert(`${username}, ${password}`);
       // this will pass the boolean data as true when the user has logged in
       auth.login();
-      history.push('/') //redirects the user back to main page
+      history.push("/"); //redirects the user back to main page
     } else {
       alert(`${name}, ${username}, ${password}`);
       // this will pass the boolean data as true when the user has logged in
       auth.login();
-      history.push('/') //redirects the user back to main page
+      history.push("/"); //redirects the user back to main page
     }
     event.preventDefault();
   };
 
   const modeSwitchHandler = (event) => {
     setSignupMode((prevMode) => !prevMode);
+    setName("");
+    setUsername("");
+    setPassword("");
+    setErrUsername(false);
+    setErrPassword(false);
+    setErrName(false);
     event.preventDefault();
   };
-
+  
   return (
     <div className={classes.AuthForm}>
       <form onSubmit={handleSubmit}>
@@ -71,9 +88,11 @@ const Login = (props) => {
                 value={name}
                 onChange={handleNameChange}
               />
-              {
-                !name && <p className={classes.characterErrorMsg}>Please enter your name</p>
-              }
+              {errName && (
+                <p className={classes.characterErrorMsg}>
+                  Please enter your name
+                </p>
+              )}
             </div>
           )}
           <label>Username: </label>
@@ -83,9 +102,10 @@ const Login = (props) => {
             value={username}
             onChange={handleUsernameChange}
           />
-            {
-            (!username || (username.length < 6 || username.length > 10)) && <p className={classes.characterErrorMsg}>Username must be between 6 and 10 characters</p>
-            }
+
+          {
+            errUsername && <p className={classes.characterErrorMsg}>Username must be between 6 and 10 characters</p>
+          }
         </div>
         <div>
           <label>Password: </label>
@@ -95,15 +115,17 @@ const Login = (props) => {
             value={password}
             onChange={handlePasswordChange}
           />
-          {
-            (!password || (password.length < 6 || password.length > 10)) && <p className={classes.characterErrorMsg}>Password must be between 6 and 10 characters</p>
-          }
+          {errPassword && (
+            <p className={classes.characterErrorMsg}>
+              Password must be between 6 and 10 characters
+            </p>
+          )}
         </div>
         <div>
-          <Button type="submit">{signupMode ? "SIGNUP" : "LOGIN"}</Button>
+          <Button type="submit" variant="contained">{signupMode ? "SIGNUP" : "LOGIN" }</Button>
         </div>
         <div>
-          <Button onClick={modeSwitchHandler}>
+          <Button onClick={modeSwitchHandler} color="primary" variant="contained">
             Switch to {!signupMode ? "SIGNUP" : "LOGIN"}
           </Button>
         </div>
