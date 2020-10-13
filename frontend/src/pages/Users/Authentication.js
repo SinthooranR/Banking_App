@@ -81,12 +81,13 @@ const Login = (props) => {
         <div>
           {signupMode && (
             <div>
-              <label>Name: </label>
+              <label className={classes.inputLabel}>Name: </label>
               <input
                 type="text"
                 placeholder="Enter Name"
                 value={name}
                 onChange={handleNameChange}
+                className={classes.inputBox}
               />
               {errName && (
                 <p className={classes.characterErrorMsg}>
@@ -95,12 +96,13 @@ const Login = (props) => {
               )}
             </div>
           )}
-          <label>Username: </label>
+          <label className={classes.inputLabel}>Username: </label>
           <input
             type="text"
             placeholder="Enter Username"
             value={username}
             onChange={handleUsernameChange}
+            className={classes.inputBox}
           />
 
           {
@@ -108,12 +110,13 @@ const Login = (props) => {
           }
         </div>
         <div>
-          <label>Password: </label>
+          <label className={classes.inputLabel}>Password: </label>
           <input
             type="password"
             placeholder="Enter Password"
             value={password}
             onChange={handlePasswordChange}
+            className={classes.inputBox}
           />
           {errPassword && (
             <p className={classes.characterErrorMsg}>
@@ -121,10 +124,10 @@ const Login = (props) => {
             </p>
           )}
         </div>
-        <div>
+        <div className={classes.authButton} >
           <Button type="submit" variant="contained">{signupMode ? "SIGNUP" : "LOGIN" }</Button>
         </div>
-        <div>
+        <div className={classes.authButton}>
           <Button onClick={modeSwitchHandler} color="primary" variant="contained">
             Switch to {!signupMode ? "SIGNUP" : "LOGIN"}
           </Button>
