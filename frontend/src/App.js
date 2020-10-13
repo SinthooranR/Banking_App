@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 // UI Components
@@ -8,6 +8,7 @@ import Navbar from "./components/Shared/Navigation/Navbar";
 import WelcomePage from "./pages/Welcome/Welcome";
 import Authentication from "./pages/Users/Authentication";
 import CardsPage from "./pages/CreditCards/CardManage";
+import OverviewPage from "./pages/Overview/Overview";
 
 import { Authenticate } from "./authContext";
 
@@ -32,16 +33,17 @@ function App() {
   if (loggedIn) {
     route = (
       <Switch>
+        <Route exact path="/" component={OverviewPage} />
         <Route path="/cards" component={CardsPage} />
       </Switch>
     );
   } else {
     route = (
-    <Switch>
-      <Route exact path="/" component={WelcomePage} />
-      <Route path="/authentication" component={Authentication} />
-    </Switch>
-    )
+      <Switch>
+        <Route exact path="/" component={WelcomePage} />
+        <Route path="/authentication" component={Authentication} />
+      </Switch>
+    );
   }
 
   return (
@@ -49,14 +51,14 @@ function App() {
       value={{
         loggedIn: loggedIn,
         login: login,
-        logout: logout
+        logout: logout,
       }}
     >
-    <Router>
-      <Navbar />
-      <main>{route}</main>
-    </Router>
-   </Authenticate.Provider>
+      <Router>
+        <Navbar />
+        <main>{route}</main>
+      </Router>
+    </Authenticate.Provider>
   );
 }
 

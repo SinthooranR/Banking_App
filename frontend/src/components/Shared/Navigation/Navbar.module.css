@@ -1,12 +1,13 @@
 .Navbar{
-    background-color: #fefefe;
+    /* background-color: #fefefe; */
+    background-color: #0F2027;
     width: 100%;
     /* position: fixed; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index:1;
-    box-shadow: 5px 5px 4px  grey;
+    box-shadow: 5px 5px 4px  #fefefe;
 }
 
 .Navbar nav{

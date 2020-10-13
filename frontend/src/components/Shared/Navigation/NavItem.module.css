@@ -10,14 +10,15 @@
   text-transform: uppercase;
   text-decoration: none;
   font-size: 18px;
-  color: #32cd32;
+  padding: 5px;
+  color: #fefefe;
 }
 
 .NavItem a:hover {
-  border-top: 5px solid #FFD700;
+  border-top: 5px solid #fefefe;
   cursor: pointer;
 }
 
 .NavItem a:visited {
-  color: #32cd32;
+  color: #fefefe;
 }

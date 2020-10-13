@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import classes from "./Authentication.module.css";
 // import Button from "../../components/Shared/UI/Button";
 
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import { Authenticate } from "../../authContext";
 
 const Login = (props) => {
@@ -21,30 +21,27 @@ const Login = (props) => {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
-    if(!event.target.value){
+    if (!event.target.value) {
       setErrName(true);
-    }
-    else{
+    } else {
       setErrName(false);
     }
   };
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
-    if(event.target.value.length < 6 || event.target.value.length > 10){
+    if (event.target.value.length < 6 || event.target.value.length > 10) {
       setErrUsername(true);
-    }
-    else{
+    } else {
       setErrUsername(false);
     }
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    if(event.target.value.length < 6 || event.target.value.length > 10){
+    if (event.target.value.length < 6 || event.target.value.length > 10) {
       setErrPassword(true);
-    }
-    else{
+    } else {
       setErrPassword(false);
     }
   };
@@ -74,29 +71,29 @@ const Login = (props) => {
     setErrName(false);
     event.preventDefault();
   };
-  
+
   return (
     <div className={classes.AuthForm}>
       <form onSubmit={handleSubmit}>
+        {signupMode && (
+          <div>
+            <label>Name </label>
+            <input
+              type="text"
+              placeholder="Enter Name"
+              value={name}
+              onChange={handleNameChange}
+              className={classes.inputBox}
+            />
+            {errName && (
+              <p className={classes.characterErrorMsg}>
+                Please enter your name
+              </p>
+            )}
+          </div>
+        )}
         <div>
-          {signupMode && (
-            <div>
-              <label className={classes.inputLabel}>Name: </label>
-              <input
-                type="text"
-                placeholder="Enter Name"
-                value={name}
-                onChange={handleNameChange}
-                className={classes.inputBox}
-              />
-              {errName && (
-                <p className={classes.characterErrorMsg}>
-                  Please enter your name
-                </p>
-              )}
-            </div>
-          )}
-          <label className={classes.inputLabel}>Username: </label>
+          <label>Username </label>
           <input
             type="text"
             placeholder="Enter Username"
@@ -105,12 +102,14 @@ const Login = (props) => {
             className={classes.inputBox}
           />
 
-          {
-            errUsername && <p className={classes.characterErrorMsg}>Username must be between 6 and 10 characters</p>
-          }
+          {errUsername && (
+            <p className={classes.characterErrorMsg}>
+              Username must be between 6 and 10 characters
+            </p>
+          )}
         </div>
         <div>
-          <label className={classes.inputLabel}>Password: </label>
+          <label>Password </label>
           <input
             type="password"
             placeholder="Enter Password"
@@ -124,11 +123,17 @@ const Login = (props) => {
             </p>
           )}
         </div>
-        <div className={classes.authButton} >
-          <Button type="submit" variant="contained">{signupMode ? "SIGNUP" : "LOGIN" }</Button>
+        <div className={classes.authButton}>
+          <Button type="submit" variant="contained">
+            {signupMode ? "SIGNUP" : "LOGIN"}
+          </Button>
         </div>
         <div className={classes.authButton}>
-          <Button onClick={modeSwitchHandler} color="primary" variant="contained">
+          <Button
+            onClick={modeSwitchHandler}
+            color="primary"
+            variant="contained"
+          >
             Switch to {!signupMode ? "SIGNUP" : "LOGIN"}
           </Button>
         </div>
