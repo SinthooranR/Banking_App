@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import logo from "../../../logo.svg";
-import NavItem from "./NavItem";
+
+import NavItem from "../Navbar/NavItem";
 
 import { Authenticate } from "../../../authContext";
 import Button from "@material-ui/core/Button";
+import Backdrop from "../Backdrop/Backdrop";
 
-import classes from "./Navbar.module.css";
+import classes from "./SideDrawer.module.css";
 
-// CAPITALIZE ALL COMPONENTS
-const Navbar = () => {
+const SideDrawer = (props) => {
   const auth = useContext(Authenticate);
   const history = useHistory();
 
@@ -19,13 +19,16 @@ const Navbar = () => {
     event.preventDefault();
   };
 
+  let attachedClasses = [classes.SideDrawer, classes.Close];
+  if (props.showDrawer) {
+    attachedClasses = [classes.SideDrawer, classes.Open];
+  }
+
   return (
-    <header className={classes.Navbar}>
-      <div>
-        <img src={logo} alt="logo" />
-      </div>
-      <nav>
-        <ul className="Navbar">
+    <React.Fragment>
+      <Backdrop show={props.showDrawer} closeBackDrop={props.closed}/>
+      <nav className={attachedClasses.join(" ")}>
+        <ul>
           {!auth.loggedIn && (
             <React.Fragment>
               <NavItem exact routeLink="/" routeName="Home" />
@@ -47,8 +50,8 @@ const Navbar = () => {
           )}
         </ul>
       </nav>
-    </header>
+    </React.Fragment>
   );
 };
 
-export default Navbar;
+export default SideDrawer;

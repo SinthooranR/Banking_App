@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 
 // UI Components
-import Navbar from "./components/Shared/Navigation/Navbar";
+import Navbar from "./components/Shared/Navbar/Navbar";
+import SideDrawer from "./components/Shared/SideDrawer/SideDrawer";
+
 
 // Page Components
 import WelcomePage from "./pages/Welcome/Welcome";
@@ -26,6 +28,17 @@ function App() {
   };
   const logout = () => {
     setLoggedIn(false);
+  };
+
+  // UI states
+  const [drawerToggled, setDrawerToggled] = useState(false);
+
+  const toggleDrawerHandler = () => {
+    setDrawerToggled(drawerToggled => !drawerToggled);
+  };
+
+  const closeDrawerHandler = () => {
+    setDrawerToggled(false);
   };
 
   let route;
@@ -55,8 +68,12 @@ function App() {
       }}
     >
       <Router>
-        <Navbar />
-        <main>{route}</main>
+        {/* only used for the sidedrawer mainly */}
+        <div style={{ height: "100%" }}>
+          <Navbar drawerClick={toggleDrawerHandler} />
+          <SideDrawer showDrawer={drawerToggled} closed={closeDrawerHandler}/>
+          <main>{route}</main>
+        </div>
       </Router>
     </Authenticate.Provider>
   );

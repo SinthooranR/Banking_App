@@ -9,6 +9,10 @@
     z-index:1;
     box-shadow: 5px 5px 4px  #fefefe;
 }
+/* 
+.Navbar div{
+    margin-left: .5rem;
+} */
 
 .Navbar nav{
     display: flex;

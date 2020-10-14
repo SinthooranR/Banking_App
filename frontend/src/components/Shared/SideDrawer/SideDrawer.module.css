@@ -1,0 +1,45 @@
+.SideDrawer{
+    height: 100%;
+    background-color: #0F2027;
+    box-shadow: 2px 0px 5px #fefefe;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    z-index: 200;
+    transition: 0 500;
+}
+
+
+.Open {
+    transform: translateX(0);
+    transition: 0.3s ease-out;
+}
+
+.Close {
+    transform: translateX(-100%);
+    transition: 0.3s ease-in;
+}
+
+.SideDrawer ul{
+    height: 100%;
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* the NavItems are in an li so this will work */
+.SideDrawer li{
+    margin: 1rem 0;
+}
+
+
+
+@media screen and (max-width: 700px){
+    .SideDrawer{
+        width: 50%;
+    }
+}
+
