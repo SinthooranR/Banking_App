@@ -34,7 +34,7 @@ const Navbar = () => {
           )}
           {auth.loggedIn && (
             <React.Fragment>
-              <NavItem routeLink="/" routeName="Overview" />
+              <NavItem exact routeLink="/" routeName="Overview" />
               <NavItem routeLink="/cards" routeName="CardStuff" />
               <Button
                 color="secondary"

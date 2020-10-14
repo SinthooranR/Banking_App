@@ -73,72 +73,75 @@ const Login = (props) => {
   };
 
   return (
-    <div className={classes.AuthForm}>
-      <form onSubmit={handleSubmit}>
-        {signupMode && (
+    <React.Fragment>
+      <h2 className={classes.HeaderMessage}>{!signupMode ? "Sign up for your online Banking Account today!" : "Have an account? Login below!"} </h2> 
+      <div className={classes.AuthForm}>
+        <form onSubmit={handleSubmit}>
+          {signupMode && (
+            <div>
+              <label>Name </label>
+              <input
+                type="text"
+                placeholder="Enter Name"
+                value={name}
+                onChange={handleNameChange}
+                
+              />
+              {errName && (
+                <p>
+                  Please enter your name
+                </p>
+              )}
+            </div>
+          )}
           <div>
-            <label>Name </label>
+            <label>Username </label>
             <input
               type="text"
-              placeholder="Enter Name"
-              value={name}
-              onChange={handleNameChange}
-              className={classes.inputBox}
+              placeholder="Enter Username"
+              value={username}
+              onChange={handleUsernameChange}
+              
             />
-            {errName && (
-              <p className={classes.characterErrorMsg}>
-                Please enter your name
+
+            {errUsername && (
+              <p>
+                Username must be between 6 and 10 characters
               </p>
             )}
           </div>
-        )}
-        <div>
-          <label>Username </label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            value={username}
-            onChange={handleUsernameChange}
-            className={classes.inputBox}
-          />
-
-          {errUsername && (
-            <p className={classes.characterErrorMsg}>
-              Username must be between 6 and 10 characters
-            </p>
-          )}
-        </div>
-        <div>
-          <label>Password </label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={handlePasswordChange}
-            className={classes.inputBox}
-          />
-          {errPassword && (
-            <p className={classes.characterErrorMsg}>
-              Password must be between 6 and 10 characters
-            </p>
-          )}
-        </div>
-        <div className={classes.authButton}>
-          <Button type="submit" variant="contained">
-            {signupMode ? "SIGNUP" : "LOGIN"}
-          </Button>
-        </div>
-        <div className={classes.authButton}>
-          <Button
-            onClick={modeSwitchHandler}
-            color="primary"
-            variant="contained"
-          >
-            Switch to {!signupMode ? "SIGNUP" : "LOGIN"}
-          </Button>
-        </div>
-      </form>
-    </div>
+          <div>
+            <label>Password </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={handlePasswordChange}
+              
+            />
+            {errPassword && (
+              <p>
+                Password must be between 6 and 10 characters
+              </p>
+            )}
+          </div>
+          <div className={classes.authButton}>
+            <Button type="submit" variant="contained">
+              {signupMode ? "SIGNUP" : "LOGIN"}
+            </Button>
+          </div>
+          <div className={classes.authButton}>
+            <Button
+              onClick={modeSwitchHandler}
+              color="primary"
+              variant="contained"
+            >
+              Switch to {!signupMode ? "SIGNUP" : "LOGIN"}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </React.Fragment>
   );
 };
 
