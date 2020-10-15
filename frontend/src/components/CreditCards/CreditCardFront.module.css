@@ -1,0 +1,20 @@
+.CardFront {
+    display: flex;
+    flex-direction: column;
+}
+
+.CardFront h2{
+    /* margin-left: 50%; */
+    text-align: center;
+}
+
+.CardFront img{
+    height: 60px;
+    width: 100px;
+}
+
+.CardFront span{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5% 0 5%;
+}

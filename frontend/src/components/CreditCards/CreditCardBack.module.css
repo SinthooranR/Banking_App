@@ -1,0 +1,21 @@
+.CardBack{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.CardBack span{
+    margin-top: 10%;
+    margin-left: 5%;
+    background-color: white;
+    height: 75px;
+    width: 90%;
+    text-align: center;
+}
+
+.CardBack h2{
+    margin-top: 10%;
+    text-align: center;
+    border: 1px solid white;
+}

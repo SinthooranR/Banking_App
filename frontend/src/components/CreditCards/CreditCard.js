@@ -1,13 +1,36 @@
-import React, {useState} from 'react';
-import CreditCardFront from './CreditCardFront';
-import CreditCardBack from './CreditCardBack';
+import React, { useState } from "react";
+import CreditCardFront from "./CreditCardFront";
+import CreditCardBack from "./CreditCardBack";
+
+import classes from './CreditCard.module.css';
 
 const CreditCard = (props) => {
-    return (  
-        <div>
-            <CreditCardFront brand="Visa" number="3434 3434 2342 5452" name="Bob" expiration="03/20" />
-            <CreditCardBack cvc="492"/>
-        </div>
+  const [creditCardFlip, setCreditCardFlip] = useState(false);
+
+  const creditCardFlipHandler = (event) => {
+    setCreditCardFlip((creditCardFlip) => !creditCardFlip);
+    event.preventDefault();
+  };
+
+  let creditCardPosition;
+
+  if (!creditCardFlip) {
+    creditCardPosition = (
+      <CreditCardFront
+        bank={props.bankName}
+        number={props.cardNumber}
+        name={props.cardHolder}
+        expiration={props.expireYear}
+      />
     );
-}
+  } else {
+    creditCardPosition = <CreditCardBack cvc={props.cvc2} signature={props.signatureName}/>;
+  }
+
+  return (
+    <div onClick={creditCardFlipHandler} className={classes.CreditCard}>
+        {creditCardPosition}
+    </div>
+  );
+};
 export default CreditCard;
