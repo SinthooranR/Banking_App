@@ -36,7 +36,8 @@ const Navbar = (props) => {
           {auth.loggedIn && (
             <React.Fragment>
               <NavItem exact routeLink="/" routeName="Overview" />
-              <NavItem routeLink="/cards" routeName="CardStuff" />
+              <NavItem routeLink="/cards" routeName="My Card" />
+              <NavItem routeLink="/addCards" routeName="Add Card" />
               <Button
                 color="secondary"
                 onClick={logoutHandler}

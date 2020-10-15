@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-
-import NavItem from "../Navbar/NavItem";
+import logo from "../../../logo.svg";
+import NavItem from "./NavItem";
 
 import { Authenticate } from "../../../authContext";
 import Button from "@material-ui/core/Button";
-import Backdrop from "../Backdrop/Backdrop";
 
-import classes from "./SideDrawer.module.css";
+import classes from "./Navbar.module.css";
 
-const SideDrawer = (props) => {
+// CAPITALIZE ALL COMPONENTS
+const Navbar = () => {
   const auth = useContext(Authenticate);
   const history = useHistory();
 
@@ -19,16 +19,13 @@ const SideDrawer = (props) => {
     event.preventDefault();
   };
 
-  let attachedClasses = [classes.SideDrawer, classes.Close];
-  if (props.showDrawer) {
-    attachedClasses = [classes.SideDrawer, classes.Open];
-  }
-
   return (
-    <React.Fragment>
-      <Backdrop show={props.showDrawer} closeBackDrop={props.closed}/>
-      <nav className={attachedClasses.join(" ")}>
-        <ul>
+    <header className={classes.Navbar}>
+      <div>
+        <img src={logo} alt="logo" />
+      </div>
+      <nav>
+        <ul className="Navbar">
           {!auth.loggedIn && (
             <React.Fragment>
               <NavItem exact routeLink="/" routeName="Home" />
@@ -38,8 +35,7 @@ const SideDrawer = (props) => {
           {auth.loggedIn && (
             <React.Fragment>
               <NavItem exact routeLink="/" routeName="Overview" />
-              <NavItem routeLink="/cards" routeName="My Card" />
-              <NavItem routeLink="/addCards" routeName="Add Card" />
+              <NavItem routeLink="/cards" routeName="CardStuff" />
               <Button
                 color="secondary"
                 onClick={logoutHandler}
@@ -51,8 +47,8 @@ const SideDrawer = (props) => {
           )}
         </ul>
       </nav>
-    </React.Fragment>
+    </header>
   );
 };
 
-export default SideDrawer;
+export default Navbar;

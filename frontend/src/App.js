@@ -11,7 +11,7 @@ import WelcomePage from "./pages/Welcome/Welcome";
 import Authentication from "./pages/Users/Authentication";
 import CardsPage from "./pages/CreditCards/CardManage";
 import OverviewPage from "./pages/Overview/Overview";
-
+import AddCardPage from "./pages/CreditCards/AddCard"
 import { Authenticate } from "./authContext";
 
 import {
@@ -48,6 +48,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={OverviewPage} />
         <Route path="/cards" component={CardsPage} />
+        <Route path="/addCards" component={AddCardPage} />
       </Switch>
     );
   } else {

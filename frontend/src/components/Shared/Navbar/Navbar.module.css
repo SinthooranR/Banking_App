@@ -2,12 +2,15 @@
     /* background-color: #fefefe; */
     background-color: #0F2027;
     width: 100%;
-    /* position: fixed; */
+    position: relative; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index:1;
     box-shadow: 5px 5px 4px  #fefefe;
+    /* clear: both; */
+    /* margin-bottom: 5%; */
+    
 }
 /* 
 .Navbar div{
@@ -15,7 +18,7 @@
 } */
 
 .Navbar nav{
-    display: flex;
+    padding-right: 5%;
 }
 
 .Navbar img{
