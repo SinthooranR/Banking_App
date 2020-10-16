@@ -43,7 +43,7 @@ const addNewUser = async (req, res, next) => {
     return next(error);
   }
   // 201 status because data is created/added
-  res.status(201).json({message:"Signed Up", users: newUser.toObject({ getters: true })});
+  res.json({message:"Signed Up", users: newUser.toObject({ getters: true })});
 };
 exports.addNewUser = addNewUser;
 // exports.loginUser = loginUser;

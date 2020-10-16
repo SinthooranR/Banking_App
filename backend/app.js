@@ -20,6 +20,18 @@ app.use("/api/users", userRoutes);
 //   res.send("<h1>Hello</h1>");
 // });
 
+// when you have 4 params express treats its as a error middleware
+app.use((error, req, res, next) => {
+    // checks if response has been sent
+    if (res.headerSent) {
+      // prevents furthers responses from being sent
+      return next(error);
+    }
+    // status of a error code or default 500 code
+    res.status(error.code || 500);
+    res.json({ message: error.message || "An unknown error occured" });
+  });
+
 // running the port after mongodb is connected
 mongoose
   .connect(
