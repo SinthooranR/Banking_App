@@ -4,6 +4,4 @@ const { check } = require("express-validator");
 
 const router = express.Router();
 
-router.post('/login',);
-
-router.post('/signup',)
+router.post('/addCard',);
