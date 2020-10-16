@@ -1,3 +1,6 @@
+require('dotenv').config();
+const uri = process.env.MONGO_URI;
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -20,7 +23,7 @@ app.use("/api/users", userRoutes);
 // running the port after mongodb is connected
 mongoose
   .connect(
-    "mongodb+srv://SinthooIbro:BankingApp123@cluster0.asoqn.mongodb.net/bank_app?retryWrites=true&w=majority"
+    uri
   )
   .then(() => {
     app.listen(5000);
