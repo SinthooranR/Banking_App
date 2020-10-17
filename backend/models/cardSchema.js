@@ -3,32 +3,32 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const cardSchema = new Schema({
-  name: {
-    type: String,
+  userId: {
+    type: mongoose.Types.ObjectId,
     required: true,
+    ref: "User",
   },
   bank: {
     type: String,
     required: true,
   },
   cardNumber: {
-    type: Number, 
+    type: Number,
     required: true,
   },
   cvc: {
-    type: Number, 
+    type: Number,
     required: true,
   },
   expirationDate: {
-    type: Date, 
+    type: Date,
     required: true,
   },
   image: {
-    type: Image, 
+    type: String,
     required: true,
   },
-
 });
 
 // a special module export for mongoose, the first being the Model name, and the second being the Schema being used
-module.exports = mongoose.model('Card', cardSchema);
+module.exports = mongoose.model("Card", cardSchema);

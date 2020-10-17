@@ -1,21 +1,35 @@
 const User = require("../models/userSchema");
-// based off the validators set in the route then add this in here
-const { validationResult } = require("express-validator");
 const HttpError = require("../models/errorModel");
 
-// const loginUser = (req, res) => {
-//     let User = new User(req.body);
-//     newUser.save((err, User) => {
-//       if (err) {
-//         res.send(err);
-//       }
-//       res.json(User);
-//     });
-//   };
+const loginUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  let realUser;
+
+  //Grabs data based off the single value
+  try {
+    realUser = await User.findOne({ username: username });
+  } catch (err) {
+    const error = new HttpError("Unable to login", 500);
+    return next(error);
+  }
+
+  //Checks if credentials are valid
+  if (!realUser || realUser.password !== password) {
+    const error = new HttpError(
+      "Login Failed, check credentials and try again",
+      400
+    );
+    return next(error);
+  }
+
+  res.json({
+    message: "logged in",
+    user: realUser.toObject({ getters: true }),
+  });
+};
 
 const addNewUser = async (req, res, next) => {
-
-  const { name, username, password } = req.body;
+  const { name, username, password, } = req.body;
 
   // custom email validator
   let existingUser;
@@ -34,7 +48,7 @@ const addNewUser = async (req, res, next) => {
   }
 
   //name: name, username: username, password: password
-  let newUser = new User({ name, username, password });
+  let newUser = new User({ name, username, password, cards: []});
 
   try {
     await newUser.save();
@@ -43,7 +57,10 @@ const addNewUser = async (req, res, next) => {
     return next(error);
   }
   // 201 status because data is created/added
-  res.json({message:"Signed Up", users: newUser.toObject({ getters: true })});
+  res.status(201).json({
+    message: "Signed Up",
+    users: newUser.toObject({ getters: true }),
+  });
 };
 exports.addNewUser = addNewUser;
-// exports.loginUser = loginUser;
+exports.loginUser = loginUser;

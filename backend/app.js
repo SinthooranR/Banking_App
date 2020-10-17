@@ -6,19 +6,17 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
+const cardRoutes = require("./routes/cardRoutes");
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
-// middleware which uses the logic from places-route
-// app.use("/api/cards", ); // => api/cards/....
+app.use("/api/users", userRoutes); // => api/users/....
 
-app.use("/api/users", userRoutes);
+app.use("/api/cards", cardRoutes); // => api/cards/....
 
-// app.use("/", (req, res, next) => {
-//   res.send("<h1>Hello</h1>");
-// });
+
 
 // when you have 4 params express treats its as a error middleware
 app.use((error, req, res, next) => {
