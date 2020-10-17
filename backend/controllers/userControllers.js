@@ -29,7 +29,7 @@ const loginUser = async (req, res, next) => {
 };
 
 const addNewUser = async (req, res, next) => {
-  const { name, username, password, } = req.body;
+  const { name, username, password } = req.body;
 
   // custom email validator
   let existingUser;
@@ -48,7 +48,7 @@ const addNewUser = async (req, res, next) => {
   }
 
   //name: name, username: username, password: password
-  let newUser = new User({ name, username, password, cards: []});
+  let newUser = new User({ name, username, password, cards: [] });
 
   try {
     await newUser.save();
@@ -62,5 +62,45 @@ const addNewUser = async (req, res, next) => {
     users: newUser.toObject({ getters: true }),
   });
 };
+
+const updateUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  const currentUsername = req.params.username;
+  const existingUser = await User.findOne({ username: currentUsername });
+  let user;
+  try {
+    user = await User.findOne({ username: currentUsername });
+  } catch (err) {
+    const error = new HttpError("Can't find user, try again", 404);
+    return next(error);
+  }
+
+  if (!existingUser) {
+    const error = new HttpError(
+      "Can't update user information, try again",
+      500
+    );
+    return next(error);
+  }
+
+  user.username = username;
+  user.password = password;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Can't update user information, try again",
+      500
+    );
+    return next(error);
+  }
+
+  res.json({
+    user: user.toObject({ getters: true }),
+  });
+};
+
+exports.updateUser = updateUser;
 exports.addNewUser = addNewUser;
 exports.loginUser = loginUser;

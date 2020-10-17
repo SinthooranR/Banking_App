@@ -6,7 +6,9 @@ const cardController = require("../controllers/cardControllers");
 const router = express.Router();
 
 // used to show all cards the user owns
+// :uid - userID
 router.get("/:uid", cardController.getCardsByUserId);
+
 
 // Used to add a card
 router.post(
@@ -17,9 +19,11 @@ router.post(
 );
 
 // Used to update card information or adding money
-router.patch("/updateCard");
+//:uid - userID
+// :cid - cardID
+router.patch("/:cid", cardController.updateCard);
 
 // Used to remove a card
-router.delete("/removeCard");
+router.delete("/:cid", cardController.deleteCard);
 
 module.exports = router;

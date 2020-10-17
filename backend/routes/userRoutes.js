@@ -15,6 +15,8 @@ router.post(
   userController.loginUser
 );
 
+router.patch("/:username", userController.updateUser);
+
 router.post(
   "/signup",
   [
