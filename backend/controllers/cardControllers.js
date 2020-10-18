@@ -4,7 +4,7 @@ const User = require("../models/userSchema");
 const mongoose = require("mongoose");
 
 const addCard = async (req, res, next) => {
-  const { userId, name, bank, cardNumber, cvc, expirationDate } = req.body;
+  const { userId, name, bank, cardNumber, cvc, expirationDate, balance } = req.body;
 
   let newCard = new Card({
     userId,
@@ -15,6 +15,7 @@ const addCard = async (req, res, next) => {
     expirationDate,
     image:
       "https://img.favpng.com/21/25/6/integrated-circuit-smart-card-png-favpng-xfdh4XZJkFekCnUaXuLRbMGZ3.jpg",
+      balance
   });
 
   let user;
@@ -75,7 +76,7 @@ const getCardsByUserId = async (req, res, next) => {
 };
 
 const updateCard = async (req, res, next) => {
-  const { name, expirationDate } = req.body;
+  const { name, expirationDate, balance } = req.body;
   const cardId = req.params.cid;
   let card;
   try {
@@ -86,6 +87,7 @@ const updateCard = async (req, res, next) => {
   }
   card.name = name;
   card.expirationDate = expirationDate;
+  card.balance = balance;
 
   try {
     await card.save();

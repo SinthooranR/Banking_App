@@ -1,4 +1,4 @@
-require('dotenv').config({path: "../../Banking_App/.env"});
+require('dotenv').config({path: "../../Banking_App/Backend/.env"});
 const uri = process.env.MONGO_URI;
 
 const express = require("express");

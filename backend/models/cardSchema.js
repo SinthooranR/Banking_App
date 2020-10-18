@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const cardSchema = new Schema({
-  
   userId: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -31,6 +30,10 @@ const cardSchema = new Schema({
   },
   image: {
     type: String,
+    required: true,
+  },
+  balance: {
+    type: Number,
     required: true,
   },
 });
