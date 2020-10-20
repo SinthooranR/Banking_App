@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 import classes from "./Authentication.module.css";
 // import Button from "../../components/Shared/UI/Button";
@@ -8,9 +9,9 @@ import Button from "@material-ui/core/Button";
 import { Authenticate } from "../../authContext";
 
 const Login = (props) => {
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [signupMode, setSignupMode] = useState(false);
   const [errUsername, setErrUsername] = useState(false);
   const [errPassword, setErrPassword] = useState(false);
@@ -46,15 +47,40 @@ const Login = (props) => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     if (!signupMode) {
-      alert(`${username}, ${password}`);
-      // this will pass the boolean data as true when the user has logged in
-      auth.login();
+      // alert(`${username}, ${password}`);
+      // api call
+      axios.post('http://localhost:5000/api/users/login', {
+        username: username,
+        password: password
+      })
+      .then((response) => {
+        console.log(response);
+        alert(response.data.user.id);
+        auth.login(response.data.user.id);
+       
+      })
+      .catch((error) => {
+        // history.push("/authentication"); //ERROR REDIRECT TEST
+        console.log(error);
+      });
+
       history.push("/"); //redirects the user back to main page
     } else {
       alert(`${name}, ${username}, ${password}`);
-      // this will pass the boolean data as true when the user has logged in
+      axios.post('http://localhost:5000/api/users/signup', {
+        name: name,
+        username: username,
+        password: password
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
       auth.login();
       history.push("/"); //redirects the user back to main page
     }
@@ -126,7 +152,7 @@ const Login = (props) => {
             )}
           </div>
           <div className={classes.authButton}>
-            <Button type="submit" variant="contained">
+            <Button type="submit" variant="contained" onClick={() => handleSubmit}>
               {signupMode ? "SIGNUP" : "LOGIN"}
             </Button>
           </div>

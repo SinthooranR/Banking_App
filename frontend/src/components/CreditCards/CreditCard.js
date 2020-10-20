@@ -24,7 +24,7 @@ const CreditCard = (props) => {
       />
     );
   } else {
-    creditCardPosition = <CreditCardBack cvc={props.cvc2} signature={props.signatureName}/>;
+    creditCardPosition = <CreditCardBack cvc={props.cvcData} signature={props.signatureName}/>;
   }
 
   return (

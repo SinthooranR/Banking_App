@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 
 // UI Components
@@ -23,12 +23,17 @@ import {
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const login = () => {
+  const [user_id, setUser_Id] = useState(false);
+
+  const login = useCallback((uid) => {
     setLoggedIn(true);
-  };
-  const logout = () => {
+    setUser_Id(uid);
+  }, []);
+
+  const logout = useCallback(() => {
     setLoggedIn(false);
-  };
+    setUser_Id(null);
+  }, []);
 
   // UI states
   const [drawerToggled, setDrawerToggled] = useState(false);
@@ -64,6 +69,7 @@ function App() {
     <Authenticate.Provider
       value={{
         loggedIn: loggedIn,
+        user_id: user_id,
         login: login,
         logout: logout,
       }}
