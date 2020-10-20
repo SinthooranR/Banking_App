@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./AddCard.module.css";
+import { useHistory } from "react-router-dom";
+import { Authenticate } from "../../authContext";
+import axios from "axios";
+
 const AddCard = (props) => {
   const [cardNumber, setNumber] = useState();
   const [name, setName] = useState();
-  const [expiration, setExpiration] = useState();
+  const [expirationDate, setExpiration] = useState();
   const [CVC, setCVC] = useState();
   const [bank, setBank] = useState();
+  const [balance, setBalance] = useState();
   const [errName, setErrName] = useState(false);
   const [errNumber, setErrNumber] = useState(false);
   const [errBank, setErrBank] = useState();
   const [errExpiration, setErrExpiration] = useState();
   const [errCVC, setErrCVC] = useState();
+  const [errBalance, setErrBalance] = useState();
+
+  const history = useHistory();
+  const auth = useContext(Authenticate);
+
   const handleNameChange = (event) => {
     setName(event.target.value);
     if (!event.target.value) {
@@ -52,14 +62,44 @@ const AddCard = (props) => {
       setErrCVC(false);
     }
   };
+
+  const handleBalanceChange = (event) => {
+    setBalance(event.target.value);
+    if (!event.target.value) {
+      setErrBalance(true);
+    } else {
+      setErrBalance(false);
+    }
+  };
+
   const handleButtonClick = (event) => {
-    alert(`${name}, ${cardNumber}, ${expiration}, ${CVC}, ${bank}`);
+    alert(`${name}, ${cardNumber}, ${expirationDate}, ${CVC}, ${bank}, ${balance}`);
     event.preventDefault();
+    axios
+      .post("http://localhost:5000/api/cards/addCard", {
+        userId: auth.user_id,
+        name: name,
+        bank: bank,
+        cardNumber: cardNumber,
+        cvc: CVC, 
+        expirationDate: expirationDate,
+        balance: balance
+      })
+      .then((response) => {
+        console.log(response);
+        history.push("/cards");
+      })
+      .catch((error) => {
+        // history.push("/authentication"); //ERROR REDIRECT TEST
+        console.log(error);
+      });
+
+    history.push("/"); //redirects the user back to main page
   };
 
   return (
-    <React.Fragment> 
-        <h2 className={classes.HeaderMessage}> Sign up for a Credit Card </h2> 
+    <React.Fragment>
+      <h2 className={classes.HeaderMessage}> Sign up for a Credit Card </h2>
       <div className={classes.AddCardForm}>
         <form>
           <label> Name </label>
@@ -99,7 +139,7 @@ const AddCard = (props) => {
             type="month" // work around
             maxlength="4"
             placeholder="Expiration Date"
-            value={expiration}
+            value={expirationDate}
             onChange={handleExpirationChange}
           />
           {errExpiration && <p>Please enter expiration date</p>}
@@ -111,6 +151,14 @@ const AddCard = (props) => {
             onChange={handleCVCChange}
           />
           {errCVC && <p>Please enter CVC</p>}
+          <label> Balance </label>
+          <input
+            type="number"
+            placeholder="$0"
+            value={balance}
+            onChange={handleBalanceChange}
+          />
+          {errBalance && <p>Please enter your deposit amount</p>}
         </form>
         <button type="submit" onClick={handleButtonClick}>
           {" "}
