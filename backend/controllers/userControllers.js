@@ -101,6 +101,26 @@ const updateUser = async (req, res, next) => {
   });
 };
 
+const getUserInfo = async (req, res, next) => {
+  const userId = req.params.userId;
+
+  let user;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching user data failed, please try again later",
+      500
+    );
+    return next(error);
+  }
+  res.json({
+    user: user.toObject({ getters: true }),
+  });
+};
+
+exports.getUserInfo = getUserInfo;
 exports.updateUser = updateUser;
 exports.addNewUser = addNewUser;
 exports.loginUser = loginUser;

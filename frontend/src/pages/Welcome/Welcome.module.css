@@ -1,0 +1,19 @@
+.Welcome {
+    text-align: center;
+}
+
+.Welcome span{
+    display: flex;
+    
+}
+
+.Welcome h2{
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+.Welcome h1{
+    margin-bottom: 5%;
+    margin-top: 2%; 
+}

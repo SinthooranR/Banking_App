@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 import classes from "./Authentication.module.css";
 // import Button from "../../components/Shared/UI/Button";
@@ -51,38 +51,37 @@ const Login = (props) => {
     if (!signupMode) {
       // alert(`${username}, ${password}`);
       // api call
-      axios.post('http://localhost:5000/api/users/login', {
-        username: username,
-        password: password
-      })
-      .then((response) => {
-        console.log(response);
-        alert(response.data.user.id);
-        auth.login(response.data.user.id);
-       
-      })
-      .catch((error) => {
-        // history.push("/authentication"); //ERROR REDIRECT TEST
-        console.log(error);
-      });
-
-      history.push("/"); //redirects the user back to main page
+      axios
+        .post("http://localhost:5000/api/users/login", {
+          username: username,
+          password: password,
+        })
+        .then((response) => {
+          console.log(response);
+          alert(response.data.user.id);
+          auth.login(response.data.user.id);
+          history.push("/"); //redirects the user back to main page
+        })
+        .catch((error) => {
+          // history.push("/authentication"); //ERROR REDIRECT TEST
+          console.log(error);
+        });
     } else {
       alert(`${name}, ${username}, ${password}`);
-      axios.post('http://localhost:5000/api/users/signup', {
-        name: name,
-        username: username,
-        password: password
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  
-      auth.login();
-      history.push("/"); //redirects the user back to main page
+      axios
+        .post("http://localhost:5000/api/users/signup", {
+          name: name,
+          username: username,
+          password: password,
+        })
+        .then((response) => {
+          console.log(response);
+          auth.login(response.data.user.id);
+          history.push("/"); //redirects the user back to main page
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     event.preventDefault();
   };
@@ -100,7 +99,11 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <h2 className={classes.HeaderMessage}>{!signupMode ? "Sign up for your online Banking Account today!" : "Have an account? Login below!"} </h2> 
+      <h2 className={classes.HeaderMessage}>
+        {!signupMode
+          ? "Sign up for your online Banking Account today!"
+          : "Have an account? Login below!"}{" "}
+      </h2>
       <div className={classes.AuthForm}>
         <form onSubmit={handleSubmit}>
           {signupMode && (
@@ -111,13 +114,8 @@ const Login = (props) => {
                 placeholder="Enter Name"
                 value={name}
                 onChange={handleNameChange}
-                
               />
-              {errName && (
-                <p>
-                  Please enter your name
-                </p>
-              )}
+              {errName && <p>Please enter your name</p>}
             </div>
           )}
           <div>
@@ -127,14 +125,9 @@ const Login = (props) => {
               placeholder="Enter Username"
               value={username}
               onChange={handleUsernameChange}
-              
             />
 
-            {errUsername && (
-              <p>
-                Username must be between 6 and 10 characters
-              </p>
-            )}
+            {errUsername && <p>Username must be between 6 and 10 characters</p>}
           </div>
           <div>
             <label>Password </label>
@@ -143,16 +136,15 @@ const Login = (props) => {
               placeholder="Enter Password"
               value={password}
               onChange={handlePasswordChange}
-              
             />
-            {errPassword && (
-              <p>
-                Password must be between 6 and 10 characters
-              </p>
-            )}
+            {errPassword && <p>Password must be between 6 and 10 characters</p>}
           </div>
           <div className={classes.authButton}>
-            <Button type="submit" variant="contained" onClick={() => handleSubmit}>
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={() => handleSubmit}
+            >
               {signupMode ? "SIGNUP" : "LOGIN"}
             </Button>
           </div>

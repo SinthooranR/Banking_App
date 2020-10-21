@@ -137,7 +137,6 @@ const AddCard = (props) => {
           <label> Expiration </label>
           <input
             type="month" // work around
-            maxlength="4"
             placeholder="Expiration Date"
             value={expirationDate}
             onChange={handleExpirationChange}

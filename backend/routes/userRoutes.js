@@ -27,3 +27,5 @@ router.post(
   userController.addNewUser
 );
 module.exports = router;
+
+router.get("/:userId", userController.getUserInfo);

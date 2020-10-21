@@ -1,29 +1,21 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
 
 import NavItem from "./NavItem";
 
 import { Authenticate } from "../../../authContext";
-import Button from "@material-ui/core/Button";
-import SideDrawerToggle from '../SideDrawer/SideDrawerToggle';
+import SideDrawerToggle from "../SideDrawer/SideDrawerToggle";
 
 import classes from "./Navbar.module.css";
 
 // CAPITALIZE ALL COMPONENTS
 const Navbar = (props) => {
   const auth = useContext(Authenticate);
-  const history = useHistory();
-
-  const logoutHandler = (event) => {
-    auth.logout();
-    history.push("/");
-    event.preventDefault();
-  };
-
   return (
     <header className={classes.Navbar}>
       <div>
-        <SideDrawerToggle click={props.drawerClick}/>
+        <span>
+          <SideDrawerToggle click={props.drawerClick} />
+        </span>
       </div>
       <nav>
         <ul>
@@ -38,13 +30,7 @@ const Navbar = (props) => {
               <NavItem exact routeLink="/" routeName="Overview" />
               <NavItem routeLink="/cards" routeName="My Card" />
               <NavItem routeLink="/addCards" routeName="Add Card" />
-              <Button
-                color="secondary"
-                onClick={logoutHandler}
-                variant="contained"
-              >
-                LOGOUT
-              </Button>
+              <NavItem routeLink="/logout" routeName="Logout" />
             </React.Fragment>
           )}
         </ul>
