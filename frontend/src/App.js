@@ -14,11 +14,11 @@ import OverviewPage from "./pages/Overview/Overview";
 import AddCardPage from "./pages/CreditCards/AddCard"
 import LogoutPage from "./pages/Users/LogoutPage"
 import { Authenticate } from "./authContext";
+import EditUserPage from "./pages/Users/EditUser"
 
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
   Switch,
 } from "react-router-dom";
 
@@ -55,6 +55,7 @@ function App() {
         <Route exact path="/" component={OverviewPage} />
         <Route path="/cards" component={CardsPage} />
         <Route path="/addCards" component={AddCardPage} />
+        <Route path="/editUser" component={EditUserPage} />
         <Route path="/logout" component={LogoutPage} />
       </Switch>
     );

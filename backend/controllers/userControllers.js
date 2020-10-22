@@ -65,26 +65,24 @@ const addNewUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { username, password } = req.body;
-  const currentUsername = req.params.username;
-  const existingUser = await User.findOne({ username: currentUsername });
+  const userId = req.params.userId;
+  const existingUser = await User.findOne({ username: username });
   let user;
   try {
-    user = await User.findOne({ username: currentUsername });
+    user = await User.findById(userId);
   } catch (err) {
     const error = new HttpError("Can't find user, try again", 404);
     return next(error);
   }
 
-  if (!existingUser) {
-    const error = new HttpError(
-      "Can't update user information, try again",
-      500
-    );
-    return next(error);
-  }
-
   user.username = username;
   user.password = password;
+
+  // checks if user exists already
+  if (existingUser) {
+    const error = new HttpError("User already exists", 422);
+    return next(error);
+  }
 
   try {
     await user.save();

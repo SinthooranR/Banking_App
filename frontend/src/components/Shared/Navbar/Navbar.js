@@ -30,6 +30,7 @@ const Navbar = (props) => {
               <NavItem exact routeLink="/" routeName="Overview" />
               <NavItem routeLink="/cards" routeName="My Card" />
               <NavItem routeLink="/addCards" routeName="Add Card" />
+              <NavItem routeLink="/editUser" routeName="Edit User" />
               <NavItem routeLink="/logout" routeName="Logout" />
             </React.Fragment>
           )}
