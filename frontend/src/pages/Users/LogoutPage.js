@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Authenticate } from "../../authContext";
 import Button from "@material-ui/core/Button";
+import classes from './LogoutPage.module.css';
 
 const Logout = () => {
   const auth = useContext(Authenticate);
@@ -17,7 +18,7 @@ const Logout = () => {
     event.preventDefault();
   };
   return (
-    <div>
+    <div className={classes.Logout}>
       <h2> Are you sure you want to logout? </h2>
       <Button
         color="primary"

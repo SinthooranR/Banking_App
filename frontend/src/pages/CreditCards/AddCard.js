@@ -13,7 +13,6 @@ const AddCard = (props) => {
   const [balance, setBalance] = useState();
   const [errName, setErrName] = useState(false);
   const [errNumber, setErrNumber] = useState(false);
-  const [errBank, setErrBank] = useState();
   const [errExpiration, setErrExpiration] = useState();
   const [errCVC, setErrCVC] = useState();
   const [errBalance, setErrBalance] = useState();
@@ -40,11 +39,6 @@ const AddCard = (props) => {
 
   const handleBankChange = (event) => {
     setBank(event.target.value);
-    if (!event.target.value) {
-      setErrBank(true);
-    } else {
-      setErrBank(false);
-    }
   };
   const handleExpirationChange = (event) => {
     setExpiration(event.target.value);

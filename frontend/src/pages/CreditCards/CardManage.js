@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import Typical from "react-typical";
 import CreditCard from "../../components/CreditCards/CreditCard";
 import classes from "./CardManage.module.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { Authenticate } from "../../authContext";
 
 const CardManage = (props) => {
@@ -20,7 +18,7 @@ const CardManage = (props) => {
     };
 
     fetchData();
-  }, []);
+  }, [auth.user_id, cards]);
 
   return (
     <div className={classes.Cards}>

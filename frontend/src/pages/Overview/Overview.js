@@ -6,7 +6,7 @@ import classes from "./Overview.module.css";
 
 const Overview = () => {
   const auth = useContext(Authenticate);
-  const [username , setUsername ] = useState("");
+  // const [username , setUsername ] = useState("");
   const [name , setName ] = useState("");
 
   useEffect(() => {
@@ -14,12 +14,12 @@ const Overview = () => {
       const httpResult = await axios.get(
         `http://localhost:5000/api/users/${auth.user_id}`
       );
-      setUsername(httpResult.data.user.username);
+      // setUsername(httpResult.data.user.username);
       setName(httpResult.data.user.name);
     };
 
     fetchData();
-  }, []);
+  }, [auth.user_id]);
 
   return(
     <div className={classes.Overview}>
