@@ -16,20 +16,24 @@ const CreditCard = (props) => {
 
   if (!creditCardFlip) {
     creditCardPosition = (
-      <CreditCardFront
-        bank={props.bankName}
-        number={props.cardNumber}
-        name={props.cardHolder}
-        expiration={props.expireYear}
-      />
+      <React.Fragment>
+        <CreditCardFront
+          bank={props.bankName}
+          number={props.cardNumber}
+          name={props.cardHolder}
+          expiration={props.expireYear}
+        />
+        <h2>Current Balance: {props.balance}</h2>
+      </React.Fragment>
     );
   } else {
-    creditCardPosition = <CreditCardBack cvc={props.cvcData} signature={props.signatureName}/>;
+    creditCardPosition = (<React.Fragment><CreditCardBack cvc={props.cvcData} signature={props.signatureName} /> <h2>Current Balance: {props.balance}</h2>
+    </React.Fragment>)
   }
 
   return (
     <div onClick={creditCardFlipHandler} className={classes.CreditCard}>
-        {creditCardPosition}
+      {creditCardPosition}
     </div>
   );
 };

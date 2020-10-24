@@ -5,17 +5,17 @@ import { Authenticate } from "../../authContext";
 import axios from "axios";
 
 const AddCard = (props) => {
-  const [cardNumber, setNumber] = useState();
-  const [name, setName] = useState();
-  const [expirationDate, setExpiration] = useState();
-  const [CVC, setCVC] = useState();
-  const [bank, setBank] = useState();
-  const [balance, setBalance] = useState();
+  const [cardNumber, setNumber] = useState("");
+  const [name, setName] = useState("");
+  const [expirationDate, setExpiration] = useState("");
+  const [CVC, setCVC] = useState("");
+  const [bank, setBank] = useState("");
+  const [balance, setBalance] = useState("");
   const [errName, setErrName] = useState(false);
   const [errNumber, setErrNumber] = useState(false);
-  const [errExpiration, setErrExpiration] = useState();
-  const [errCVC, setErrCVC] = useState();
-  const [errBalance, setErrBalance] = useState();
+  const [errExpiration, setErrExpiration] = useState(false);
+  const [errCVC, setErrCVC] = useState(false);
+  const [errBalance, setErrBalance] = useState(false);
 
   const history = useHistory();
   const auth = useContext(Authenticate);
@@ -75,7 +75,7 @@ const AddCard = (props) => {
         name: name,
         bank: bank,
         cardNumber: cardNumber,
-        cvc: CVC, 
+        cvc: CVC,
         expirationDate: expirationDate,
         balance: balance
       })
@@ -107,7 +107,7 @@ const AddCard = (props) => {
           <label> Card Number </label>
           <input
             type="tel" // work around
-            maxlength="16"
+            maxLength="16"
             placeholder="Enter Your 16 Digit Card Number"
             value={cardNumber}
             onChange={handleNumberChange}
@@ -119,7 +119,7 @@ const AddCard = (props) => {
             value={bank}
             onChange={handleBankChange}
           >
-            <option selected="true" disabled="disabled">
+            <option defaultValue={true}>
               {" "}
               Select your Bank{" "}
             </option>

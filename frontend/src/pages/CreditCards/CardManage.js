@@ -8,17 +8,26 @@ const CardManage = (props) => {
   const auth = useContext(Authenticate);
   const [cards, setCards] = useState([]);
 
+
   useEffect(() => {
     const fetchData = async () => {
-      const httpResult = await axios.get(
-        `http://localhost:5000/api/cards/${auth.user_id}`
-      );
-      setCards(httpResult.data.card);
-      console.log(cards);
+      await axios.get(
+        `http://localhost:5000/api/cards/${auth.user_id}`,
+      )
+        .then(function (response) {
+          setCards(response.data.card);
+        })
+        .catch((error) => {
+          // history.push("/authentication"); //ERROR REDIRECT TEST
+          console.log(error);
+        })
     };
 
     fetchData();
-  }, [auth.user_id, cards]);
+
+    // NEEDS TO BE FIXED
+    // adding cards causes an infinite request loop
+  }, [auth.user_id]);
 
   return (
     <div className={classes.Cards}>
@@ -31,6 +40,7 @@ const CardManage = (props) => {
           cardHolder={card.name}
           expireYear={card.expirationDate}
           cvcData={card.cvc}
+          balance={card.balance}
         />
       ))}
     </div>
