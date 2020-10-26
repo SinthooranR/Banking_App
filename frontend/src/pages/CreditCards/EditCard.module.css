@@ -1,0 +1,66 @@
+.HeaderMessage {
+    padding-top: 5%;
+    text-align: center;
+    margin-top: 0;
+  }
+  .EditCardForm {
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 16px;
+    text-align: center;
+    margin-top: 5%;
+    background-color: #fefefe;
+    border: 2px solid #0f2027;
+    box-shadow: -5px -5px 75px #0f2027;
+    border-radius: 5%;
+    
+  }
+  
+  .EditCardForm button {
+    height: 2rem;
+  }
+  
+  .EditCardForm button:disabled,
+  .EditCardForm button:hover:disabled,
+  .EditCardForm button:active:disabled {
+    background: #ccc;
+    color: #979797;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .EditCardForm p {
+    color: red;
+    font-size: 13px;
+  }
+  .EditCardForm form {
+    text-align: center;
+  }
+  
+  .EditCardForm div {
+    padding-top: 5%;
+  }
+  
+  .EditCardForm label {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+  }
+  
+  .EditCardForm input {
+    height: 25px;
+    width: 50%;
+    display: block;
+    /* top right bottom left */
+    margin: 5% 0 5% 25%;
+  }
+  .EditCardForm select {
+    display: block;
+    margin: 5% 0 5% 30%;
+  }
+  .EditCardForm .AddCardButton {
+    display: inline-block;
+    padding-left: 20px;
+    padding-top: 20px;
+    text-align: center;
+  }
+  

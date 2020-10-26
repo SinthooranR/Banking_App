@@ -1,12 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import CreditCard from "../../components/CreditCards/CreditCard";
-import classes from "./CardManage.module.css";
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { Authenticate } from "../../authContext";
+import Button from "@material-ui/core/Button";
+import classes from "./CardManage.module.css";
 
 const CardManage = (props) => {
   const auth = useContext(Authenticate);
   const [cards, setCards] = useState([]);
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -29,21 +32,53 @@ const CardManage = (props) => {
     // adding cards causes an infinite request loop
   }, [auth.user_id]);
 
+  const editCardHandler = (cardID) => {
+    auth.grabCard(cardID);
+    alert(`${cardID}`);
+    history.push("/editCards");
+  }
+
+  const deleteCardHandler = (cardID) => {
+    auth.grabCard(cardID);
+    alert(`${cardID}`);
+    history.push("/deleteCards");
+  }
+
   return (
     <div className={classes.Cards}>
       {cards.map((card) => (
-        // <div key={card.id}>{card.bank}</div>
-        <CreditCard
-          key={card.id}
-          bankName={card.bank}
-          cardNumber={card.cardNumber}
-          cardHolder={card.name}
-          expireYear={card.expirationDate}
-          cvcData={card.cvc}
-          balance={card.balance}
-        />
-      ))}
-    </div>
+        <div key={card.id}>
+          <CreditCard
+            key={card.id}
+            bankName={card.bank}
+            cardNumber={card.cardNumber}
+            cardHolder={card.name}
+            expireYear={card.expirationDate}
+            cvcData={card.cvc}
+          />
+          <span style={{ display: "flex", width: "100%" }}>
+            <Button
+              color="primary"
+              onClick={() => editCardHandler(card.id)}
+              variant="contained"
+            // style={{ display: "inline" }}
+            >
+              Update
+        </Button>
+            <Button
+              color="secondary"
+              onClick={() => deleteCardHandler(card.id)}
+              variant="contained"
+            // style={{ display: "inline" }}
+            >
+              Delete
+        </Button>
+            <h4>Current Balance: {card.balance}</h4>
+          </span>
+        </div>
+      ))
+      }
+    </div >
   );
 };
 
