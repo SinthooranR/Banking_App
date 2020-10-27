@@ -3,19 +3,21 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 // import Button from "../../components/Shared/UI/Button";
 import Button from "@material-ui/core/Button";
-import {Authenticate} from "../../authContext"
+import { Authenticate } from "../../authContext";
 import classes from "./Authentication.module.css";
 
 const EditUser = () => {
   const [grabUsername, setGrabUsername] = useState("");
   const [grabPassword, setGrabPassword] = useState("");
+  const [grabSavingsGoal, setGrabSavingsGoal] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [savingsGoal, setSavings] = useState("");
   const [errUsername, setErrUsername] = useState(false);
   const [errPassword, setErrPassword] = useState(false);
   const auth = useContext(Authenticate);
   const history = useHistory();
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const httpResult = await axios.get(
@@ -23,6 +25,7 @@ const EditUser = () => {
       );
       setGrabUsername(httpResult.data.user.username);
       setGrabPassword(httpResult.data.user.password);
+      setGrabSavingsGoal(httpResult.data.user.savingsGoal);
     };
 
     fetchData();
@@ -35,6 +38,10 @@ const EditUser = () => {
     } else {
       setErrUsername(false);
     }
+  };
+
+  const handleSavingsChange = (event) => {
+    setSavings(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -50,10 +57,11 @@ const EditUser = () => {
       .patch(`http://localhost:5000/api/users/${auth.user_id}`, {
         username: username,
         password: password,
+        savingsGoal: savingsGoal,
       })
       .then((response) => {
         console.log(response);
-        alert(response.data.user.id);
+        alert(response.data.user.username);
         auth.login(response.data.user.id);
         history.push("/"); //redirects the user back to main page
       })
@@ -63,6 +71,23 @@ const EditUser = () => {
       });
     event.preventDefault();
   };
+
+  // const handleSubmitNewGoal = async (event) => {
+  //   await axios.patch(`http://localhost:5000/api/users/${auth.user_id}`, {
+  //     savingsGoal: savingsGoal,
+  //   })
+  //   .then((response) => {
+  //     console.log(response);
+  //     alert(response.data.user.savingsGoal);
+  //     auth.login(response.data.user.id);
+  //     history.push("/"); //redirects the user back to main page
+  //   })
+  //   .catch((error) => {
+  //     // history.push("/authentication"); //ERROR REDIRECT TEST
+  //     console.log(error);
+  //   });
+  //   event.preventDefault();
+  // }
   return (
     <React.Fragment>
       <h2 className={classes.HeaderMessage}>Edit User</h2>
@@ -89,14 +114,32 @@ const EditUser = () => {
             />
             {errPassword && <p>Password must be between 6 and 10 characters</p>}
           </div>
+          <div>
+            <label>
+              Update Monthly Savings Goal, Current Goal: {grabSavingsGoal}{" "}
+            </label>
+            <input
+              type="number"
+              placeholder="Enter New Goal"
+              value={savingsGoal}
+              onChange={handleSavingsChange}
+            />
+          </div>
           <div className={classes.authButton}>
             <Button
               type="submit"
               variant="contained"
               onClick={() => handleSubmit}
             >
-                Submit
+              Submit
             </Button>
+            {/* <Button
+              type="submit"
+              variant="contained"
+              onClick={() => handleSubmitNewGoal}
+            >
+                New Savings Goal
+            </Button> */}
           </div>
         </form>
       </div>

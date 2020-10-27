@@ -28,8 +28,9 @@ const loginUser = async (req, res, next) => {
   });
 };
 
+
 const addNewUser = async (req, res, next) => {
-  const { name, username, password } = req.body;
+  const { name, username, password, savingsGoal } = req.body;
 
   // custom email validator
   let existingUser;
@@ -48,7 +49,7 @@ const addNewUser = async (req, res, next) => {
   }
 
   //name: name, username: username, password: password
-  let newUser = new User({ name, username, password, cards: [] });
+  let newUser = new User({ name, username, password, cards: [], savingsGoal });
 
   try {
     await newUser.save();
@@ -64,7 +65,7 @@ const addNewUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, savingsGoal } = req.body;
   const userId = req.params.userId;
   const existingUser = await User.findOne({ username: username });
   let user;
@@ -77,6 +78,7 @@ const updateUser = async (req, res, next) => {
 
   user.username = username;
   user.password = password;
+  user.savingsGoal = savingsGoal; 
 
   // checks if user exists already
   if (existingUser) {

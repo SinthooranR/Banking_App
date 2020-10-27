@@ -22,6 +22,10 @@ const userSchema = new Schema({
       ref: "Card", //connects current scheme with another Schema
     },
   ],
+  savingsGoal: {
+    type: Number,
+    required: true,
+  }
 });
 
 // a special module export for mongoose, the first being the Model name, and the second being the Schema being used

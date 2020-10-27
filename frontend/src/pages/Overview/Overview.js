@@ -9,6 +9,7 @@ const Overview = () => {
   // const [username , setUsername ] = useState("");
   const [name, setName] = useState("");
   const [balance, setBalance] = useState(null);
+  const [savings, setSavings] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,8 +19,9 @@ const Overview = () => {
       );
       // setUsername(httpResult.data.user.username);
       setName(httpResult.data.user.name);
+      
+      setSavings(httpResult.data.user.savingsGoal);
       console.log(httpResult);
-
 
       // Grabs the Balance data from Card Schema
       let sum = 0;
@@ -28,8 +30,9 @@ const Overview = () => {
       );
 
       for (let i = 0; i < httpResultCard.data.card.length; i++) {
-        console.log(sum += httpResultCard.data.card[i].balance);
+        sum += httpResultCard.data.card[i].balance
       }
+      console.log("Total Balance ", sum)
       setBalance(sum);
     };
 
@@ -51,6 +54,7 @@ const Overview = () => {
       />
 
       <h2>Total Balance: {balance}</h2>
+      <h2>Monthly Saving goal: {savings}</h2> 
     </div>
 
   )
