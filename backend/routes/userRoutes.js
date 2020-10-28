@@ -16,6 +16,9 @@ router.post(
 );
 
 router.patch("/:userId", userController.updateUser);
+router.patch("/:userId/password", userController.updatePassword);
+router.patch("/:userId/savingsGoal", userController.updateSavings);
+
 
 router.post(
   "/signup",

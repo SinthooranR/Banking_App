@@ -1,0 +1,65 @@
+.HeaderMessage {
+  padding-top: 10%;
+  text-align: center;
+  margin-top: 0;
+}
+.AuthForm {
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 16px;
+  text-align: center;
+  margin-top: 5%;
+  background-color: #fefefe;
+  border: 2px solid #0f2027;
+  box-shadow: -5px -5px 75px #0f2027;
+  border-radius: 5%;
+}
+
+.AuthForm button {
+  height: 2rem;
+  margin-top: 4.5%;
+  margin-left: 3%;
+  padding-right: 0.5rem;
+}
+
+.AuthForm span {
+  display: flex;
+  text-align: center;
+  margin-right: 20%;
+  flex-direction: row;
+  
+}
+
+.AuthForm button:disabled,
+.AuthForm button:hover:disabled,
+.AuthForm button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.AuthForm p {
+  color: red;
+  font-size: 13px;
+}
+.AuthForm form {
+  text-align: center;
+}
+
+.AuthForm div {
+  padding-top: 5%;
+}
+
+.AuthForm label {
+  text-transform: none;
+  font-size: 1rem;
+}
+
+.AuthForm input {
+  height: 25px;
+  width: 50%;
+  display: block;
+  /* top right bottom left */
+  margin: 5% 0 5% 25%;
+}

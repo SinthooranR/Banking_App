@@ -4,7 +4,7 @@ import axios from "axios";
 // import Button from "../../components/Shared/UI/Button";
 import Button from "@material-ui/core/Button";
 import { Authenticate } from "../../authContext";
-import classes from "./Authentication.module.css";
+import classes from "./EditUser.module.css";
 
 const EditUser = () => {
   const [grabUsername, setGrabUsername] = useState("");
@@ -52,12 +52,10 @@ const EditUser = () => {
       setErrPassword(false);
     }
   };
-  const handleSubmit = async (event) => {
+  const handleSubmitUsername = async (event) => {
     axios
       .patch(`http://localhost:5000/api/users/${auth.user_id}`, {
         username: username,
-        password: password,
-        savingsGoal: savingsGoal,
       })
       .then((response) => {
         console.log(response);
@@ -71,76 +69,100 @@ const EditUser = () => {
       });
     event.preventDefault();
   };
+  const handleSubmitPassword = async (event) => {
+    axios
+      .patch(`http://localhost:5000/api/users/${auth.user_id}/password`, {
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
+        alert(response.data.user.password);
+        auth.login(response.data.user.id);
+        history.push("/"); //redirects the user back to main page
+      })
+      .catch((error) => {
+        // history.push("/authentication"); //ERROR REDIRECT TEST
+        console.log(error);
+      });
+    event.preventDefault();
+  };
 
-  // const handleSubmitNewGoal = async (event) => {
-  //   await axios.patch(`http://localhost:5000/api/users/${auth.user_id}`, {
-  //     savingsGoal: savingsGoal,
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //     alert(response.data.user.savingsGoal);
-  //     auth.login(response.data.user.id);
-  //     history.push("/"); //redirects the user back to main page
-  //   })
-  //   .catch((error) => {
-  //     // history.push("/authentication"); //ERROR REDIRECT TEST
-  //     console.log(error);
-  //   });
-  //   event.preventDefault();
-  // }
+  const handleSubmitSavings = async (event) => {
+    axios
+      .patch(`http://localhost:5000/api/users/${auth.user_id}/savingsGoal`, {
+        savingsGoal: savingsGoal,
+      })
+      .then((response) => {
+        console.log(response);
+        alert(response.data.user.savingsGoal);
+        auth.login(response.data.user.id);
+        history.push("/"); //redirects the user back to main page
+      })
+      .catch((error) => {
+        // history.push("/authentication"); //ERROR REDIRECT TEST
+        console.log(error);
+      });
+    event.preventDefault();
+  };
   return (
     <React.Fragment>
       <h2 className={classes.HeaderMessage}>Edit User</h2>
       <div className={classes.AuthForm}>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>New Username, Current Username: {grabUsername} </label>
+        <form onSubmit={handleSubmitUsername}>
+          <label>Current Username: {grabUsername} </label>
+          <span>
             <input
               type="text"
               placeholder="Enter New Username"
               value={username}
               onChange={handleUsernameChange}
             />
-
-            {errUsername && <p>Username must be between 6 and 10 characters</p>}
-          </div>
-          <div>
-            <label>New Password, Current Password: {grabPassword} </label>
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={() => handleSubmitUsername}
+            >
+              Submit
+            </Button>
+          </span>
+          {errUsername && <p>Username must be between 6 and 10 characters</p>}
+        </form>
+        <form onSubmit={handleSubmitPassword}>
+          <label>Current Password: {grabPassword} </label>
+          <span>
             <input
               type="password"
               placeholder="Enter New Password"
               value={password}
               onChange={handlePasswordChange}
             />
-            {errPassword && <p>Password must be between 6 and 10 characters</p>}
-          </div>
-          <div>
-            <label>
-              Update Monthly Savings Goal, Current Goal: {grabSavingsGoal}{" "}
-            </label>
-            <input
-              type="number"
-              placeholder="Enter New Goal"
-              value={savingsGoal}
-              onChange={handleSavingsChange}
-            />
-          </div>
-          <div className={classes.authButton}>
             <Button
               type="submit"
               variant="contained"
-              onClick={() => handleSubmit}
+              onClick={() => handleSubmitPassword}
             >
               Submit
             </Button>
-            {/* <Button
+          </span>
+          {errPassword && <p>Password must be between 6 and 10 characters</p>}
+        </form>
+        <form onSubmit={handleSubmitSavings}>
+          <label>Current Monthly Goal: ${grabSavingsGoal} </label>
+          <span>
+            <input
+              type="number"
+              value={savingsGoal}
+              placeholder="Enter New Goal"
+              onChange={handleSavingsChange}
+            />
+            <Button
               type="submit"
               variant="contained"
-              onClick={() => handleSubmitNewGoal}
+              onClick={() => handleSubmitSavings}
             >
-                New Savings Goal
-            </Button> */}
-          </div>
+              Submit
+            </Button>
+          </span>
         </form>
       </div>
     </React.Fragment>
