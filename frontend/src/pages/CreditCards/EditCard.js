@@ -63,7 +63,7 @@ const EditCard = (props) => {
 
     return (
         <React.Fragment>
-            <h2 className={classes.HeaderMessage}> Sign up for a Credit Card </h2>
+            <h2 className={classes.HeaderMessage}> Update Current Card </h2>
             <div className={classes.EditCardForm}>
                 <form>
                     <label> Name </label>

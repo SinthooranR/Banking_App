@@ -106,7 +106,7 @@ const AddCard = (props) => {
           {errName && <p>Please enter your full name</p>}
           <label> Card Number </label>
           <input
-            type="tel" // work around
+            type="number" // work around
             maxLength="16"
             placeholder="Enter Your 16 Digit Card Number"
             value={cardNumber}
@@ -139,6 +139,7 @@ const AddCard = (props) => {
           <label> CVC </label>
           <input
             type="number"
+            maxLength="3"
             placeholder="Enter CVC"
             value={CVC}
             onChange={handleCVCChange}

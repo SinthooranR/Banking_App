@@ -3,9 +3,57 @@
   width: 400px;
   height: 250px;
   /* background-image: linear-gradient(#000000 ,#434343); */
-  background-color: #7EA0A3;
   margin-top: 5%;
   margin-bottom: 1%;
+  color: white;
+  box-shadow: 1px 2px 3px 1px black;
+}
+
+.TD{
+  background-color: #7EA0A3;
+  border-radius: 20px;
+  width: 400px;
+  height: 250px;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  /* background-image: linear-gradient(#000000 ,#434343); */
+  color: white;
+  box-shadow: 1px 2px 3px 1px black;
+}
+
+.RBC{
+  background-color: blue;
+  border-radius: 20px;
+  width: 400px;
+  height: 250px;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  /* background-image: linear-gradient(#000000 ,#434343); */
+  color: white;
+  box-shadow: 1px 2px 3px 1px black;
+}
+
+.BMO{
+  background-color: lightskyblue;
+  border-radius: 20px;
+  width: 400px;
+  height: 250px;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  /* background-image: linear-gradient(#000000 ,#434343); */
+  color: white;
+  box-shadow: 1px 2px 3px 1px black;
+}
+
+
+.BNS{
+  background-color: salmon;
+  border-radius: 20px;
+  width: 400px;
+  height: 250px;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  /* background-image: linear-gradient(#000000 ,#434343); */
   color: white;
   box-shadow: 1px 2px 3px 1px black;
 }

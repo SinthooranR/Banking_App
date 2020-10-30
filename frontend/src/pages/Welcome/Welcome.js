@@ -13,7 +13,7 @@ const Welcome = () => (
     <span>
       <h2 className={classes.SignUp}>Sign up for a credit card today!</h2>
       <CreditCard
-        bankName="TD Bank"
+        bankName="TD Canada Trust"
         cardNumber="5555 5555 5555 5555"
         cardHolder="John Doe"
         expireYear="2020-30"
