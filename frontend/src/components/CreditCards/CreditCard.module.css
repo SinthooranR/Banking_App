@@ -1,7 +1,11 @@
 .CreditCard {
-    border: solid 5px black;
-    width: 600px;
-    height: 300px;
-    background-image: linear-gradient(#061700 , #0f9b0f);
-    margin-top: 5%;
+  border-radius: 20px;
+  width: 400px;
+  height: 250px;
+  /* background-image: linear-gradient(#000000 ,#434343); */
+  background-color: #7EA0A3;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  color: white;
+  box-shadow: 1px 2px 3px 1px black;
 }

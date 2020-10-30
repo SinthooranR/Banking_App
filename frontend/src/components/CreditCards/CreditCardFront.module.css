@@ -6,15 +6,17 @@
 .CardFront h2{
     /* margin-left: 50%; */
     text-align: center;
+    margin-bottom: 0%;
 }
 
 .CardFront img{
     height: 60px;
-    width: 100px;
+    width: 80px;
+    margin-left: 3%;
 }
 
 .CardFront span{
     display: flex;
     justify-content: space-between;
-    margin: 0 5% 0 5%;
+    margin: 0 5% 0% 5%;
 }

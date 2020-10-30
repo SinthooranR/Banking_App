@@ -2,20 +2,29 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
 }
 
 .CardBack span{
-    margin-top: 10%;
+    margin-top: 15%;
     margin-left: 5%;
     background-color: white;
-    height: 75px;
+    height: 50px;
     width: 90%;
     text-align: center;
 }
-
-.CardBack h2{
-    margin-top: 10%;
+/* .CardBackStrip {
+    margin-top: 5%;
+    margin-left: 0%;
+    background-color: black;
+    height: 40px;
+    width: 100%;
     text-align: center;
+} */
+.CardBack h2{
+    margin-top: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    padding: 1.5%;
     border: 1px solid white;
 }
