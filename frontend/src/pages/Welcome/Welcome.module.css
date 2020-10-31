@@ -1,18 +1,33 @@
 .Welcome {
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .Welcome span{
     display: flex;
-    
+    margin-right: 5%;
+    flex-direction: row;
 }
 
-.Welcome h2{
-    margin-left: 13%;
+.Welcome h3{
+    margin-left: 10%;
     margin-top: 5%;
     margin-right: 5%;
 }
 
 .Welcome h1{
     margin-top: 2%; 
+}
+
+.WelcomeImage {
+    width: 30%;
+    max-height: 50%;
+    max-width: 50%;
+    height: 280px;
+    margin-left: 18%;
+    margin-right: 5%;
+    margin-top: 4%;
+    object-fit: cover;
+    
 }
