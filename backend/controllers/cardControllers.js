@@ -2,9 +2,18 @@ const Card = require("../models/cardSchema");
 const HttpError = require("../models/errorModel");
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
+const { updateOne } = require("../models/cardSchema");
 
 const addCard = async (req, res, next) => {
-  const { userId, name, bank, cardNumber, cvc, expirationDate, balance } = req.body;
+  const {
+    userId,
+    name,
+    bank,
+    cardNumber,
+    cvc,
+    expirationDate,
+    balance,
+  } = req.body;
 
   let newCard = new Card({
     userId,
@@ -15,7 +24,7 @@ const addCard = async (req, res, next) => {
     expirationDate,
     image:
       "https://img.favpng.com/21/25/6/integrated-circuit-smart-card-png-favpng-xfdh4XZJkFekCnUaXuLRbMGZ3.jpg",
-      balance
+    balance,
   });
 
   let user;
@@ -75,8 +84,8 @@ const getCardsByUserId = async (req, res, next) => {
   });
 };
 
-const updateCard = async (req, res, next) => {
-  const { name, expirationDate, balance } = req.body;
+const updateName = async (req, res, next) => {
+  const { name } = req.body;
   const cardId = req.params.cid;
   let card;
   try {
@@ -86,8 +95,78 @@ const updateCard = async (req, res, next) => {
     return next(error);
   }
   card.name = name;
+
+  try {
+    await card.save();
+  } catch (err) {
+    const error = new HttpError("Can't update card, try again", 500);
+    return next(error);
+  }
+  res.json({
+    card: card.toObject({ getters: true }),
+  });
+};
+
+const updateRenewDate = async (req, res, next) => {
+  const { expirationDate } = req.body;
+  const cardId = req.params.cid;
+  let card;
+  try {
+    card = await Card.findById(cardId);
+  } catch (err) {
+    const error = new HttpError("Can't find card, try again", 404);
+    return next(error);
+  }
   card.expirationDate = expirationDate;
-  card.balance = balance;
+
+  try {
+    await card.save();
+  } catch (err) {
+    const error = new HttpError("Can't update card, try again", 500);
+    return next(error);
+  }
+  res.json({
+    card: card.toObject({ getters: true }),
+  });
+};
+const updateWithdraw = async (req, res, next) => {
+  const { withdraw } = req.body;
+  const cardId = req.params.cid;
+  let card;
+  try {
+    card = await Card.findById(cardId);
+  } catch (err) {
+    const error = new HttpError("Can't find card, try again", 404);
+    return next(error);
+  }
+  if (withdraw > card.balance) {
+    const error = new HttpError("Withdraw exceeds card balance", 500);
+    return next(error);
+  }
+  card.balance = card.balance - withdraw;
+  try {
+    await card.save();
+  } catch (err) {
+    const error = new HttpError("Can't update card, try again", 500);
+    return next(error);
+  }
+  res.json({
+    card: card.toObject({ getters: true }),
+  });
+};
+
+const updateDeposit = async (req, res, next) => {
+  const { deposit } = req.body;
+  const cardId = req.params.cid;
+  let card;
+  try {
+    card = await Card.findById(cardId);
+  } catch (err) {
+    const error = new HttpError("Can't find card, try again", 404);
+    return next(error);
+  }
+
+  card.balance = card.balance + deposit;
 
   try {
     await card.save();
@@ -130,7 +209,10 @@ const deleteCard = async (req, res, next) => {
   });
 };
 
+exports.updateDeposit = updateDeposit;
+exports.updateRenewDate = updateRenewDate;
+exports.updateWithdraw = updateWithdraw;
+exports.updateName = updateName;
 exports.deleteCard = deleteCard;
-exports.updateCard = updateCard;
 exports.addCard = addCard;
 exports.getCardsByUserId = getCardsByUserId;

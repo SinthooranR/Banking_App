@@ -36,6 +36,7 @@ const cardSchema = new Schema({
     type: Number,
     required: true,
   },
+
 });
 
 // a special module export for mongoose, the first being the Model name, and the second being the Schema being used

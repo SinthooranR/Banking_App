@@ -21,7 +21,11 @@ router.post(
 // Used to update card information or adding money
 //:uid - userID
 // :cid - cardID
-router.patch("/:cid", cardController.updateCard);
+router.patch("/:cid", cardController.updateName);
+router.patch("/:cid/expiration", cardController.updateRenewDate);
+router.patch("/:cid/withdraw", cardController.updateWithdraw);
+router.patch("/:cid/deposit", cardController.updateDeposit);
+
 
 // Used to remove a card
 router.delete("/:cid", cardController.deleteCard);
